@@ -1,4 +1,4 @@
-public class Villa {
+public class Villa extends Herbegement {
     private boolean piscinePrivee;
     private int superficieJardin;
 

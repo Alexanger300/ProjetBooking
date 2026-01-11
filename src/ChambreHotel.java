@@ -1,4 +1,4 @@
-public class ChambreHotel {
+public class ChambreHotel extends Herbegement {
     private int numero;
     private boolean petitDejeunerInclus;
 
