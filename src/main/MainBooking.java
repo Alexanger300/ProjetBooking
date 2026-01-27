@@ -25,10 +25,6 @@ public class MainBooking {
         System.out.println("#############################################");
         System.out.println("#      BIENVENUE SUR MINI-BOOKING           #");
         System.out.println("#############################################");
-        System.out.println("\nCe programme vous permet de rechercher et réserver des hébergements.");
-        System.out.println("Nous avons pré-chargé quelques hotels et villas pour vous.");
-        System.out.println("Vous pourrez choisir une ville, voir les détails et faire une réservation.");
-        System.out.println("C'est simple : laissez-vous guider par le menu !");
         
         boolean continuer = true;
 
@@ -48,14 +44,14 @@ public class MainBooking {
                 catalogue.afficherTout();
             
             } else if (choix == 2) {
-                System.out.print("Entrez le nom de la ville (ex: Paris, Lyon, Nice) : ");
+                System.out.print("Entrez le nom de la ville : ");
                 String ville = scanner.nextLine();
                 List<Hebergement> resultats = catalogue.rechercherParVille(ville);
                 
                 if (resultats.isEmpty()) {
                     System.out.println("Aucun hébergement trouvé à " + ville);
                 } else {
-                    System.out.println("Nous avons trouvé " + resultats.size() + " hébergement(s) :");
+                    System.out.println("Nous avons trouvé " + resultats.size() + " hébergements :");
                     for (Hebergement h : resultats) {
                         h.afficherDetails();
                     }
@@ -93,8 +89,16 @@ public class MainBooking {
                     int annee = scanner.nextInt();
                     System.out.print("Mois (1-12) : ");
                     int mois = scanner.nextInt();
+                    while (mois < 1 || mois > 12) {
+                        System.out.println("Mois invalide. Réservation annulée. recommencez :");
+                        int mois = scanner.nextInt();;
+                    }
                     System.out.print("Jour de début : ");
                     int jourDebut = scanner.nextInt();
+                    while (jourDebut < 1 || jourDebut > 31) {
+                        System.out.println("Jour invalide. Réservation annulée. recommencez :");
+                        int jourDebut = scanner.nextInt();;
+                    }
                     
                     System.out.print("Combien de nuits ? ");
                     int nbNuits = scanner.nextInt();
