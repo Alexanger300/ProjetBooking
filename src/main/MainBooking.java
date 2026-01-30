@@ -62,8 +62,18 @@ public class MainBooking {
                 
                 System.out.print("Votre nom : ");
                 String nom = scanner.nextLine();
+                for (i=0; i<nom.length(); i++) {
+                    while (Character.isDigit(nom.charAt(i))) {
+                        System.out.println("Nom invalide. Réservation annulée. recommencez :");
+                        String nom = scanner.nextLine();
+                    }
+                }
                 System.out.print("Votre email : ");
                 String email = scanner.nextLine();
+                if (!email.contains("@") || !email.contains(".")) {
+                    System.out.println("Email invalide. Réservation annulée. recommencez :");
+                    String email = scanner.nextLine();
+                }
                 Client client = new NouveauClient("C_USER", nom, email);
                 
                 System.out.println("Voici la liste pour choisir :");
