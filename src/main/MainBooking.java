@@ -34,7 +34,8 @@ public class MainBooking {
             System.out.println("2. Rechercher par ville");
             System.out.println("3. Faire une réservation");
             System.out.println("4. Quitter");
-            System.out.print("Votre choix (1-4) : ");
+            System.out.println("5. Accès Administrateur");
+            System.out.print("Votre choix (1-5) : ");
             
             int choix = scanner.nextInt();
             scanner.nextLine(); 
@@ -44,8 +45,13 @@ public class MainBooking {
                 catalogue.afficherTout();
             
             } else if (choix == 2) {
-                System.out.print("Entrez le nom de la ville : ");
+                System.out.print("Entrez le nom de la ville (ou '0' pour retour) : ");
                 String ville = scanner.nextLine();
+                if (ville.equals("0")) {
+                    System.out.println("Retour au menu principal.");
+                    continue;
+                }
+
                 List<Hebergement> resultats = catalogue.rechercherParVille(ville);
                 
                 if (resultats.isEmpty()) {
@@ -60,33 +66,38 @@ public class MainBooking {
             } else if (choix == 3) {
                 System.out.println("\n--- Nouvelle Réservation ---");
                 
-                System.out.print("Votre nom : ");
+                System.out.print("Votre nom (ou '0' pour retour) : ");
                 String nom = scanner.nextLine();
-                for (i=0; i<nom.length(); i++) {
-                    while (Character.isDigit(nom.charAt(i))) {
-                        System.out.println("Nom invalide. Réservation annulée. recommencez :");
-                        String nom = scanner.nextLine();
-                    }
+                if (nom.equals("0")) {
+                    System.out.println("Annulation de la réservation.");
+                    continue;
                 }
+
                 System.out.print("Votre email : ");
                 String email = scanner.nextLine();
-                if (!email.contains("@") || !email.contains(".")) {
-                    System.out.println("Email invalide. Réservation annulée. recommencez :");
-                    String email = scanner.nextLine();
-                }
                 Client client = new NouveauClient("C_USER", nom, email);
                 
                 System.out.println("Voici la liste pour choisir :");
                 catalogue.afficherTout();
-                System.out.print("Entrez le NOM EXACT de l'hébergement (ex: Hotel Ibis) : ");
+                System.out.print("Entrez le NOM EXACT de l'hébergement (ex: Hotel Ibis) (ou '0' pour annuler) : ");
                 String nomHebergement = scanner.nextLine();
                 
+                if (nomHebergement.equals("0")) {
+                    System.out.println("Annulation de la réservation.");
+                    continue;
+                }
+
                 Hebergement hebergementChoisi = null;
                 Hebergement[] tableauLocal = {h1, h2, h3, h4};
                 
                 for(Hebergement h : tableauLocal) {
-                    if(h.getNom().equalsIgnoreCase(nomHebergement)) {
-                        hebergementChoisi = h;
+                    if(h.getNom().equalsIgnoreCase(nomH(ou '0' pour annuler) : ");
+                    int annee = scanner.nextInt();
+                    if (annee == 0) {
+                        System.out.println("Annulation.");
+                        continue;
+                    }
+
                         break;
                     }
                 }
@@ -100,16 +111,17 @@ public class MainBooking {
                     System.out.print("Mois (1-12) : ");
                     int mois = scanner.nextInt();
                     while (mois < 1 || mois > 12) {
-                        System.out.println("Mois invalide. Réservation annulée. recommencez :");
-                        int mois = scanner.nextInt();;
+                        System.out.println("Mois invalide (1-12). Recommencez :");
+                        mois = scanner.nextInt();
                     }
+
                     System.out.print("Jour de début : ");
                     int jourDebut = scanner.nextInt();
                     while (jourDebut < 1 || jourDebut > 31) {
-                        System.out.println("Jour invalide. Réservation annulée. recommencez :");
-                        int jourDebut = scanner.nextInt();;
+                        System.out.println("Jour invalide. Recommencez :");
+                        jourDebut = scanner.nextInt();
                     }
-                    
+
                     System.out.print("Combien de nuits ? ");
                     int nbNuits = scanner.nextInt();
                     
@@ -118,8 +130,48 @@ public class MainBooking {
                     
                     Reservation resa = new Reservation("RES_USER", client, hebergementChoisi, dateDebut, dateFin);
                     resa.confirmer(); 
-                    
-                    System.out.println(resa); 
+                    (ou '0' pour retour) : ");
+                String password = scanner.nextLine();
+                
+                if (password.equals("0")) {
+                    continue;
+                }
+}
+
+            } else if (choix == 5) {
+                System.out.print("Mot de passe administrateur : ");
+                String password = scanner.nextLine();
+                
+                if ("admin123".equals(password)) {
+                    System.out.println("\n--- MODE ADMINISTRATEUR ---");
+                    System.out.println("1. Supprimer un hébergement");
+                    System.out.println("2. Retour menu principal");
+                    System.out.print("Choix : ");
+                    int choixAdmin = scanner.nextInt();
+                    scanner.nextLine();(ou '-1' pour annuler) : ");
+                        int indexASupprimer = scanner.nextInt();
+                        scanner.nextLine();
+                        
+                        if (indexASupprimer == -1) continue;
+System.out.println("Quel hébergement supprimer ? (Entrez le numéro)");
+                        for (int i = 0; i < catalogue.size(); i++) {
+                            Hebergement h = catalogue.get(i);
+                            if (h != null) System.out.println(i + ". " + h.getNom());
+                        }
+                        
+                        System.out.print("Numéro : ");
+                        int indexASupprimer = scanner.nextInt();
+                        scanner.nextLine();
+                        
+                        Hebergement hASupprimer = catalogue.get(indexASupprimer);
+                        if (hASupprimer != null) {
+                            catalogue.supprimerHebergement(hASupprimer, admin);
+                        } else {
+                            System.out.println("Numéro invalide.");
+                        }
+                    }
+                } else {
+                    System.out.println("Accès refusé : Mot de passe incorrect.");
                 }
 
             } else if (choix == 4) {

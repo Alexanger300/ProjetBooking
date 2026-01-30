@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class Hebergement implements Reservable, Comparable<Hebergement> {
-    protected String id, nom, localisation;;
+    protected String id, nom, localisation;
     protected double prixParNuit, noteMoyenne;
     protected List<LocalDate[]> periodesReservees;
 
