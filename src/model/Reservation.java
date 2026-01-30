@@ -50,7 +50,7 @@ public class Reservation {
 
     @Override
     public String toString() {
-        return "Resa #" + id + " | " + client.getNom() + " -> " + hebergement.getNom() + 
+        return "Resasultat utilisateur |" + client.getNom() + " -> " + hebergement.getNom() + 
                " | " + dateDebut + " au " + dateFin + 
                " | Statut: " + statut + 
                " | Total: " + String.format("%.2f", prixTotal) + "€";

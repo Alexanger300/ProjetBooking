@@ -5,11 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class Hebergement implements Reservable, Comparable<Hebergement> {
-    protected String id;
-    protected String nom;
-    protected String localisation;
-    protected double prixParNuit;
-    protected double noteMoyenne;
+    protected String id, nom, localisation;;
+    protected double prixParNuit, noteMoyenne;
     protected List<LocalDate[]> periodesReservees;
 
     public Hebergement(String id, String nom, String localisation, double prixParNuit, double noteMoyenne) {
@@ -21,21 +18,13 @@ public abstract class Hebergement implements Reservable, Comparable<Hebergement>
         this.periodesReservees = new ArrayList<>();
     }
 
-    public String getNom() {
-        return nom;
-    }
+    public String getNom() {return nom;}
     
-    public double getPrixParNuit() {
-        return prixParNuit;
-    }
+    public double getPrixParNuit() {return prixParNuit;}
 
-    public String getLocalisation() {
-        return localisation;
-    }
+    public String getLocalisation() {return localisation;}
 
-    public double getNoteMoyenne() {
-        return noteMoyenne;
-    }
+    public double getNoteMoyenne() {return noteMoyenne;}
 
     @Override
     public boolean estDisponible(LocalDate dateDebut, LocalDate dateFin) {
